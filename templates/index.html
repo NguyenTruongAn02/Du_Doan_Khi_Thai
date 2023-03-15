@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>DỰ ĐOÁN LƯỢNG CO2 CỦA XE</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    :root{
+      mauvien: --#FC9E4F;
+      mauchinh: --#FF521B;
+      maunen: --#EDD382;
+      mauchu: --#020122;
+    }
+    .btn {
+      background-image: linear-gradient(45deg, #FC9E4F, #FF521B);
+      /* Green */
+      border: none;
+      text-align: center;
+      border-radius: 4px;
+      padding: 14px 40px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      margin: 4px 2px;
+      cursor: pointer;
+      color: rgb(229, 240, 248);
+      margin-left: 58.5%;
+    }
+    .btn:hover{
+      background-image: linear-gradient(45deg, #f1f1f1, rgb(253, 253, 233));
+      color: #FF521B;
+    }
+    .form {
+      display: block;
+    }
+    .input{
+      display: block;
+      border: 1px solid #FC9E4F;
+      width: 40%;
+      height: 40px;
+      margin: 3% 30%;
+      outline: none;
+      border-radius: 0px;
+      padding: 0 8px;
+    }
+    .input:focus {
+       box-shadow: inset 0 -5px 8px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 
+      }
+    .login>p{
+      text-align: center;
+      color: #FF521B;
+      font-size: 28px;
+      font-weight: bold;
+    }
+  </style>
+
+</head>
+
+<body style="background-image: linear-gradient(45deg, #F2F3AE, #EDD382);">
+  <div class="login">
+    <h1 style="text-align: center; color: #020122;">Dự đoán lượng khí thải CO2 của phương tiện giao thông</h1>
+    <h3 style="text-align: center; color: #020122; ">Nhập các giá trị sau để dự đoán lượng khí thải CO2 từ xe</h3>
+
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post" class="form">
+      <input class="input" type="text" name="enginesize" placeholder="Kích Thước Động Cơ" required="required" />
+      <input class="input" type="text" name="cylinders" placeholder="Xi Lanh" required="required" />
+      <input class="input" type="text" name="fuel" placeholder="Nhiên Liệu" required="required" />
+
+      <button type="submit" class="btn">Dự Đoán</button>
+    </form>
+
+    <br>
+    <br>
+    <p>{{ prediction_text }}</p>
+
+  </div>
+
+
+</body>
+
+</html>
